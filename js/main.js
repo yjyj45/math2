@@ -2,6 +2,16 @@
 (function (global) {
   const app = document.getElementById('app');
 
+  function syncBgmForScreen(screen) {
+    const A = global.GameAudio;
+    if (!A || !A.isUnlocked()) return;
+    if (screen === 'battle') {
+      A.playGameBGM();
+    } else {
+      A.playMainBGM();
+    }
+  }
+
   function render() {
     const state = global.Game.state;
     if (state.screen === 'setup') {
@@ -11,9 +21,20 @@
     } else if (state.screen === 'result') {
       app.innerHTML = global.UI.renderResultScreen(state);
     }
+    syncBgmForScreen(state.screen);
   }
 
   global.render = render;
+
+  document.addEventListener(
+    'click',
+    () => {
+      if (!global.GameAudio) return;
+      global.GameAudio.unlock();
+      syncBgmForScreen(global.Game.state.screen);
+    },
+    { once: true, capture: true }
+  );
 
   app.addEventListener('click', (e) => {
     const target = e.target.closest('[data-action]');
@@ -22,6 +43,11 @@
     const action = target.dataset.action;
 
     switch (action) {
+      case 'toggle-mute':
+        global.GameAudio.toggleMute();
+        syncBgmForScreen(G.state.screen);
+        render();
+        break;
       case 'select-format':
         G.setFormat(target.dataset.key);
         render();

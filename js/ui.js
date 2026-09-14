@@ -50,6 +50,11 @@
     return String(v);
   }
 
+  function renderMuteButton(extraClass) {
+    const muted = global.GameAudio && global.GameAudio.isMuted();
+    return `<button class="mute-btn ${extraClass || ''}" data-action="toggle-mute" title="음악 켜기/끄기">${muted ? '🔇' : '🔊'}</button>`;
+  }
+
   function renderOperand(op) {
     if (op.num === undefined) {
       return `<span class="whole-only">${escapeHtml(op.whole)}</span>`;
@@ -99,6 +104,7 @@
 
     return `
       <div class="setup-screen">
+        ${renderMuteButton('setup-mute-btn')}
         <h1 class="title">🍀 분수 배틀 퀴즈 🍀</h1>
         <p class="subtitle">4학년 1학기 · 분수의 덧셈과 뺄셈</p>
 
@@ -185,6 +191,7 @@
     return `
       <div class="battle-screen">
         <div class="top-bar">
+          ${renderMuteButton('battle-mute-btn')}
           <div class="timer">${state.timeRemaining}</div>
           <button class="end-btn" data-action="end-game">게임 종료</button>
         </div>
@@ -218,6 +225,7 @@
 
     return `
       <div class="result-screen">
+        ${renderMuteButton('setup-mute-btn')}
         <h1 class="title">🏆 최종 결과 🏆</h1>
         <div class="result-list">${rowsHtml}</div>
         <button class="start-btn" data-action="restart">다시 하기</button>

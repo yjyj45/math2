@@ -178,6 +178,7 @@
     if (correct) {
       panel.score += 1;
       panel.feedback = 'correct';
+      if (global.GameAudio) global.GameAudio.playCorrectSfx();
       global.render();
       if (state.config.switchEnabled) {
         panel.locked = true;
