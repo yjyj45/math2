@@ -128,12 +128,8 @@
     `;
   }
 
-  function renderAnswerPreview(panel) {
-    const w = panel.inputs.whole;
-    const n = panel.inputs.num;
-    const d = panel.inputs.den;
-    const wholeHtml = w ? `<span class="mixed-whole">${escapeHtml(w)}</span>` : '';
-    return `<div class="answer-line">${wholeHtml}<span class="fraction"><span class="num">${n || '&nbsp;'}</span><span class="den">${d || '&nbsp;'}</span></span></div>`;
+  function fieldContent(value, label) {
+    return value ? `<span class="tab-value">${escapeHtml(value)}</span>` : `<span class="tab-label">${label}</span>`;
   }
 
   function renderPanel(panel, theme, rank) {
@@ -152,15 +148,14 @@
         </div>
         <div class="panel-medal">${medalFor(rank)}</div>
         <div class="panel-question">${renderQuestion(panel.question)}</div>
-        <div class="answer-preview">${renderAnswerPreview(panel)}</div>
         <div class="keypad ${panel.locked ? 'disabled' : ''}">
           <div class="keypad-tabs">
             <button class="tab whole-tab ${panel.activeField === 'whole' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="whole">
-              <span class="tab-label">자연수</span>
+              ${fieldContent(panel.inputs.whole, '자연수')}
             </button>
             <div class="tab fraction-tab">
-              <button class="tab-half ${panel.activeField === 'num' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="num">분자</button>
-              <button class="tab-half ${panel.activeField === 'den' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="den">분모</button>
+              <button class="tab-half ${panel.activeField === 'num' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="num">${fieldContent(panel.inputs.num, '분자')}</button>
+              <button class="tab-half ${panel.activeField === 'den' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="den">${fieldContent(panel.inputs.den, '분모')}</button>
             </div>
             <button class="clear-all-btn" data-action="keypad-clear" data-panel="${panel.id}" title="전체 지우기">⌦</button>
           </div>
