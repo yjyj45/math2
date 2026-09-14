@@ -150,13 +150,9 @@
         <div class="panel-question">${renderQuestion(panel.question)}</div>
         <div class="keypad ${panel.locked ? 'disabled' : ''}">
           <div class="keypad-tabs">
-            <button class="tab whole-tab ${panel.activeField === 'whole' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="whole">
-              ${fieldContent(panel.inputs.whole, '자연수')}
-            </button>
-            <div class="tab fraction-tab">
-              <button class="tab-half ${panel.activeField === 'num' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="num">${fieldContent(panel.inputs.num, '분자')}</button>
-              <button class="tab-half ${panel.activeField === 'den' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="den">${fieldContent(panel.inputs.den, '분모')}</button>
-            </div>
+            <button class="tab ${panel.activeField === 'whole' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="whole">${fieldContent(panel.inputs.whole, '자연수')}</button>
+            <button class="tab ${panel.activeField === 'num' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="num">${fieldContent(panel.inputs.num, '분자')}</button>
+            <button class="tab ${panel.activeField === 'den' ? 'active' : ''}" data-action="select-field" data-panel="${panel.id}" data-field="den">${fieldContent(panel.inputs.den, '분모')}</button>
             <button class="clear-all-btn" data-action="keypad-clear" data-panel="${panel.id}" title="전체 지우기">⌦</button>
           </div>
           <div class="keypad-grid">
