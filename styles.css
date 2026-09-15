@@ -398,17 +398,45 @@ button {
   color: #fff;
 }
 
-.keypad-tabs .tab {
+.whole-tab {
   flex: 1;
   min-height: 56px;
 }
 
-.tab.active {
+.fraction-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 56px;
+  background: #2c2f45;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fraction-tab .tab-half {
+  flex: 1;
+  background: transparent;
+  border-radius: 0;
+  color: #cfd2e6;
+  font-size: 0.85rem;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fraction-tab .tab-half:first-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.tab.active,
+.fraction-tab .tab-half.active {
   background: #ff5ca8;
   color: #fff;
 }
 
-.tab.active .tab-value {
+.tab.active .tab-value,
+.fraction-tab .tab-half.active .tab-value {
   color: #fff;
 }
 
